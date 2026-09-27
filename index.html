@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#ff1a6b">
+<title>PRINCESS</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Plus Jakarta Sans',sans-serif;background:#0a0a0f;height:100vh;overflow:hidden;display:flex;flex-direction:column}
+.top{height:62px;background:#12121a;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid #222}
+.logo{font-weight:800;letter-spacing:4px;color:#fff;font-size:16px}.logo b{color:#ff1a6b}
+.live{font-size:9px;letter-spacing:2px;background:#ff1a6b;color:#fff;padding:5px 10px;border-radius:20px}
+.stage{flex:1;position:relative;background:radial-gradient(ellipse at 50% 30%,#1e1e32 0%,#0a0a0f 65%);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.stage::before{content:'';position:absolute;bottom:0;width:100%;height:35%;background:linear-gradient(180deg,transparent,#000);opacity:0.8}
+.floor-light{position:absolute;bottom:8%;width:320px;height:80px;background:radial-gradient(ellipse,rgba(255,26,107,0.25),transparent 70%);border-radius:50%;filter:blur(10px)}
+.model{position:relative;width:280px;height:560px;transform:scale(1.05);z-index:2}
+.shadow{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);width:120px;height:14px;background:rgba(0,0,0,0.6);border-radius:50%;filter:blur(6px)}
+/* FACE - ULTRA REAL */
+.head{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:132px;height:152px;z-index:20}
+.face-shape{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 25%,#ffd8c2 0%,#f7b89e 55%,#e99a81 100%);border-radius:60px 60px 52px 52px;box-shadow:inset 0 -10px 20px rgba(0,0,0,0.15),0 10px 30px rgba(0,0,0,0.3)}
+.jaw-shadow{position:absolute;bottom:8px;left:15%;right:15%;height:18px;background:linear-gradient(180deg,transparent,rgba(120,60,40,0.15));border-radius:50%;filter:blur(3px)}
+/* HAIR - REALISTIC */
+.hair{position:absolute;background:var(--hair,#0e0e0e);transition:0.4s}
+.hair-back{top:-18px;left:-22px;right:-22px;height:145px;border-radius:70px 70px 40px 40px;z-index:-1;box-shadow:inset 0 10px 30px rgba(255,255,255,0.15)}
+.hair-back::after{content:'';position:absolute;top:20px;left:15px;width:40px;height:80px;background:linear-gradient(90deg,rgba(255,255,255,0.2),transparent);border-radius:50%;transform:rotate(-15deg)}
+.hair-front{top:-14px;left:-18px;right:-18px;height:58px;border-radius:70px 70px 20px 20px;z-index:5}
+/* EYES - LIKE ANGELA */
+.eyes{position:absolute;top:58px;left:12px;right:12px;display:flex;justify-content:space-between}
+.eye-box{width:38px;height:38px;background:#fff;border-radius:50%;position:relative;box-shadow:inset 0 3px 8px rgba(0,0,0,0.2),0 2px 0 #fff;overflow:hidden}
+.iris{position:absolute;top:7px;left:7px;width:24px;height:24px;background:radial-gradient(circle at 30% 30%,#6d4a2a 0%,#3e2815 45%,#1a0f08 100%);border-radius:50%;transition:0.2s}
+.iris::before{content:'';position:absolute;top:3px;left:3px;width:8px;height:8px;background:#fff;border-radius:50%;box-shadow:0 0 6px #fff}
+.lash{position:absolute;top:-6px;left:-2px;right:-2px;height:8px;background:repeating-linear-gradient(90deg,#000 0 2px,transparent 2px 5px);border-radius:50% 50% 0 0;opacity:0.9}
+.lid{position:absolute;top:0;left:0;right:0;height:0%;background:#e99a81;z-index:10;animation:blink 5s infinite}
+@keyframes blink{0%,93%,100%{height:0}94.5%{height:100%}95.5%{height:0}}
+.nose{position:absolute;top:88px;left:50%;transform:translateX(-50%);width:10px;height:14px;background:linear-gradient(180deg,rgba(0,0,0,0.06),rgba(0,0,0,0.12));border-radius:0 0 5px 5px;filter:blur(0.5px)}
+.lips{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:28px;height:16px}
+.lip-top{position:absolute;top:0;width:100%;height:7px;background:#b81d42;border-radius:20px 20px 6px 6px}
+.lip-bottom{position:absolute;bottom:0;width:100%;height:11px;background:linear-gradient(180deg,#ff2d6b 0%,#a81a3a 100%);border-radius:0 0 14px 14px;box-shadow:inset 0 2px 6px rgba(255,255,255,0.5)}
+.lip-shine{position:absolute;bottom:3px;left:6px;width:8px;height:4px;background:rgba(255,255,255,0.8);border-radius:50%;transform:rotate(-10deg)}
+.blush{position:absolute;top:92px;width:28px;height:16px;background:rgba(255,26,107,0.18);border-radius:50%;filter:blur(4px)}.blush.l{left:0}.blush.r{right:0}
+/* BODY - MODEL PROPORTIONS */
+.body{position:absolute;top:155px;left:50%;transform:translateX(-50%);width:88px;height:125px;background:linear-gradient(180deg,#f7b89e 0%,#e99a81 100%);border-radius:28px 28px 10px 10px;z-index:10}
+.neck{position:absolute;top:138px;left:50%;transform:translateX(-50%);width:32px;height:28px;background:linear-gradient(#f0b49a,#e99a81);z-index:11;border-radius:0 0 8px 8px}
+.arms{position:absolute;top:165px;left:50%;transform:translateX(-50%);width:166px;display:flex;justify-content:space-between;z-index:9}.arm{width:32px;height:115px;background:linear-gradient(180deg,#f7b89e,#e99a81);border-radius:18px;box-shadow:inset 0 -5px 10px rgba(0,0,0,0.1)}
+.legs{position:absolute;top:275px;left:50%;transform:translateX(-50%);width:88px;height:235px;display:flex;gap:8px;z-index:8}.leg{flex:1;background:linear-gradient(180deg,#e99a81 0%,#d9826b 100%);border-radius:0 0 22px 22px;position:relative;box-shadow:inset 0 5px 15px rgba(0,0,0,0.1)}.heel{position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:44px;height:14px;background:#111;border-radius:0 8px 4px 8px}
+/* DRESS - REAL FABRIC */
+.dress{position:absolute;top:160px;left:50%;transform:translateX(-50%);width:148px;height:285px;z-index:15;background:var(--dress,#000);clip-path:polygon(12% 0,88% 0,100% 18%,100% 100%,0% 100%,0% 18%);border-radius:12px 12px 45px 45px;box-shadow:0 15px 40px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.2);transition:0.6s}
+.dress::before{content:'';position:absolute;top:0;left:22%;width:25%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);transform:skewX(-14deg)}
+.dress::after{content:'';position:absolute;bottom:15%;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,0,0,0.2),transparent)}
+/* CLOSET */
+.closet{height:230px;background:#16161e;border-top:1px solid #252535;padding:14px 14px 18px}
+.tabs{display:flex;gap:8px;margin-bottom:14px}.t{flex:1;padding:11px;background:#1e1e2c;color:#666;border-radius:14px;text-align:center;font-size:10px;letter-spacing:2px;font-weight:800;cursor:pointer;border:1px solid #252535}.t.on{background:#fff;color:#000;border-color:#fff;box-shadow:0 8px 20px rgba(255,255,255,0.15)}
+.grid{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 8px}.grid::-webkit-scrollbar{display:none}
+.item{min-width:76px;height:86px;background:#1e1e2c;border-radius:18px;border:1.5px solid #252535;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:0.25s;position:relative}.item.on{border-color:#ff1a6b;background:#252535;transform:translateY(-6px);box-shadow:0 10px 30px rgba(255,26,107,0.3)}.item .icon{width:44px;height:44px;border-radius:12px;margin-bottom:6px;display:flex;align-items:center;justify-content:center;font-size:22px}.item .name{font-size:7px;letter-spacing:1.2px;color:#888}
+</style>
+</head>
+<body>
+<div class="top"><div class="logo">PRINCESS <b>STUDIO</b></div><div class="live">● LIVE PARIS</div></div>
+<div class="stage"><div class="floor-light"></div>
+<div class="model" id="model">
+<div class="shadow"></div>
+<div class="head"><div class="hair hair-back" id="hBack"></div><div class="face-shape"><div class="eyes"><div class="eye-box"><div class="lash"></div><div class="lid"></div><div class="iris"></div></div><div class="eye-box"><div class="lash"></div><div class="lid"></div><div class="iris"></div></div></div><div class="nose"></div><div class="blush l"></div><div class="blush r"></div><div class="lips"><div class="lip-top"></div><div class="lip-bottom"><div class="lip-shine"></div></div></div><div class="jaw-shadow"></div></div><div class="hair hair-front" id="hFront"></div></div>
+<div class="neck"></div><div class="body"></div><div class="arms"><div class="arm"></div><div class="arm"></div></div><div class="legs"><div class="leg"><div class="heel"></div></div><div class="leg"><div class="heel"></div></div></div>
+<div class="dress" id="dress"></div>
+</div>
+</div>
+<div class="closet">
+<div class="tabs"><div class="t on" onclick="sw(this,'gown')">GOWNS</div><div class="t" onclick="sw(this,'hair')">HAIR</div><div class="t" onclick="sw(this,'skin')">SKIN</div></div>
+<div class="grid" id="grid"></div>
+</div>
+<script>
+const gowns=[
+{c:'#000',n:'NOIR',i:'🖤'},{c:'linear-gradient(180deg,#ff0a54 0%,#7a002a 100%)',n:'ROUGE',i:'♦️'},{c:'linear-gradient(180deg,#fff 0%,#d8d8d8 100%)',n:'BLANC',i:'🤍'},{c:'linear-gradient(180deg,#00f5ff 0%,#0033aa 100%)',n:'COBALT',i:'💎'},{c:'linear-gradient(180deg,#ffd700 0%,#8a6d00 100%)',n:'GOLD',i:'✨'},{c:'linear-gradient(180deg,#ff8ad8 0%,#b0006d 100%)',n:'BARBIE',i:'💖'},{c:'linear-gradient(180deg,#2d0050 0%,#000 100%)',n:'GALAXY',i:'🌌'},{c:'linear-gradient(180deg,#00ff88 0%,#004422 100%)',n:'EMERALD',i:'💚'}
+];
+const hairs=[
+{c:'#070707',n:'JET'},{c:'#3b2316',n:'ESPRESSO'},{c:'#c99a5a',n:'HONEY'},{c:'#ff4d6d',n:'CHERRY'},{c:'#a855f7',n:'LILAC'},{c:'#f5f5f5',n:'PLATINUM'},{c:'#ff8c00',n:'GINGER'}
+];
+let mode='gown';
+function render(){
+const g=document.getElementById('grid');g.innerHTML='';
+const list=mode==='gown'?gowns:mode==='hair'?hairs:hairs;
+list.forEach((it,idx)=>{
+let el=document.createElement('div');el.className='item'+(idx===0?' on':'');
+let iconBg=mode==='gown'?it.c:it.c;
+el.innerHTML=`<div class="icon" style="background:${iconBg};color:#fff">${it.i||'●'}</div><div class="name">${it.n}</div>`;
+el.onclick=()=>{
+document.querySelectorAll('.item').forEach(x=>x.classList.remove('on'));el.classList.add('on');
+if(mode==='gown'){document.getElementById('dress').style.background=it.c}
+else{document.getElementById('hBack').style.background=it.c;document.getElementById('hFront').style.background=it.c}
+};
+g.appendChild(el);
+});
+}
+function sw(t,m){document.querySelectorAll('.t').forEach(x=>x.classList.remove('on'));t.classList.add('on');mode=m;render()}
+render();
+document.getElementById('hBack').style.background='#070707';document.getElementById('hFront').style.background='#070707';document.getElementById('dress').style.background='#000';
+/* eye follow */
+document.addEventListener('mousemove',e=>{
+let x=(e.clientX/window.innerWidth-0.5)*8;let y=(e.clientY/window.innerHeight-0.5)*6;
+document.querySelectorAll('.iris').forEach(ir=>ir.style.transform=`translate(${x}px,${y}px)`);
+});
+</script>
+</body>
+</html>
